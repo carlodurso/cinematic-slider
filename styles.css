@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Fascinate+Inline&family=Lilita+One&family=Lobster&display=swap');
+
+#slider-container {
+    position: relative;
+    margin: 0 auto;
+  }
+
+/* Navigation dots container */
+.dot-container {
+  position: relative;
+  bottom: 100px;
+  display: block;
+  text-align: center;
+  z-index: 50;
+}
+
+/* Each dot */
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: #ffd900 2px solid;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+/* Hover effect on dot */
+.dot:hover {
+  background-color: #ffd900;
+}
+
+/* Active dot */
+.dot.active {
+  background-color: #ffd900;
+}
+
+.sound{
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  z-index: 100;
+}
+
+.sound span{
+  display: block;
+  width: 25px;
+  height:25px;
+  /* border: #ffd900 2px solid; */
+  border-radius: 50%;
+  padding: 4px;
+  cursor: pointer;
+}
+
+
+.muted{
+  color: #ffd900;
+  background-color: rgb(255, 255, 255);
+}
+
+.playing{
+  background-color: rgb(255, 217, 0);
+  color: #fff;
+}
+
+.left, .right {
+  background-color: rgb(255, 217, 0);
+  /* border: #ffd900 2px solid; */
+  color: rgb(255, 2255, 255);
+  border-radius: 50%;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 0 15px;
+}
+
+.left{
+  margin-right: 25px;
+}
+.right{
+  margin-left: 25px;
+}
+
+.left:hover, .right:hover{
+  background-color: rgb(255, 255, 255);
+  color: #ffd900;
+}
