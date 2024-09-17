@@ -52,8 +52,13 @@ export class SquareTransitionPlugin {
         // Animate the transition
         await this.animateTransition(mainCanvas, mainCtx, prevCanvas, currentCanvas);
 
+
         if (loadedMedia[currentIndex].tagName === 'IMG'){
             this.drawText(mainCtx, mediaData[currentIndex])
+        } else {
+            loadedMedia[currentIndex].pause() 
+            loadedMedia[currentIndex].currentTime = 1.5
+            loadedMedia[currentIndex].play()    
         }
 
         this.isAnimating = false;
