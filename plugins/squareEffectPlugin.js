@@ -2,13 +2,14 @@ export class SquareTransitionPlugin {
     constructor() {
         this.squares = [];
         this.isAnimating = false;
-        this.animationDuration = 2000; // 1 second in milliseconds
+        this.animationDuration = 1500; // 1 second in milliseconds
         this.totalSquares = 45; // We'll aim for approximately this many squares
         this.gap = 10;
+        this.blankSquareProbability = 0.3; // 30% chance for each square to go blank
+        this.blankColor = '#FFFFFF'; // Color of the blank squares
     }
 
     async applyEffect(mainCanvas, mainCtx, loadedMedia, currentIndex, prevIndex, mediaData) {
-        
         if (this.isAnimating) return;
         this.isAnimating = true;
 
@@ -32,7 +33,8 @@ export class SquareTransitionPlugin {
                     y: i * squareSize,
                     width: squareSize,
                     height: squareSize + this.gap,
-                    progress: 0
+                    progress: 0,
+                    isBlank: Math.random() < this.blankSquareProbability
                 });
             }
         }
@@ -103,13 +105,28 @@ export class SquareTransitionPlugin {
 
                     mainCtx.clip();
 
-                    // Draw previous image
-                    mainCtx.globalAlpha = 1 - square.progress;
-                    mainCtx.drawImage(prevCanvas, 0, 0);
-
-                    // Draw current image
-                    mainCtx.globalAlpha = square.progress;
-                    mainCtx.drawImage(currentCanvas, 0, 0);
+                    if (square.isBlank) {
+                        // Transition to and from blank
+                        if (square.progress < 0.5) {
+                            mainCtx.globalAlpha = 1 - square.progress * 2;
+                            mainCtx.drawImage(prevCanvas, 0, 0);
+                            mainCtx.globalAlpha = square.progress * 2;
+                            mainCtx.fillStyle = this.blankColor;
+                            mainCtx.fillRect(square.x, square.y, square.width, square.height);
+                        } else {
+                            mainCtx.globalAlpha = 2 - square.progress * 2;
+                            mainCtx.fillStyle = this.blankColor;
+                            mainCtx.fillRect(square.x, square.y, square.width, square.height);
+                            mainCtx.globalAlpha = square.progress * 2 - 1;
+                            mainCtx.drawImage(currentCanvas, 0, 0);
+                        }
+                    } else {
+                        // Normal transition
+                        mainCtx.globalAlpha = 1 - square.progress;
+                        mainCtx.drawImage(prevCanvas, 0, 0);
+                        mainCtx.globalAlpha = square.progress;
+                        mainCtx.drawImage(currentCanvas, 0, 0);
+                    }
 
                     mainCtx.restore();                    
                 });
