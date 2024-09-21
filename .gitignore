@@ -1,3 +1,9 @@
 archive/
 examples/
+public/
+.firebaserc
+firebase.js
+firebase.json
+.firebase/
 videos/
+plugin guide.pdf

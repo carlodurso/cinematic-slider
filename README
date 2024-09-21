@@ -3,6 +3,9 @@
 
 This project is a customizable canvas-based image and video slider with audio and plugin support. It has been inspired by the work of [Dario Fuzinato](https://codepen.io/fuzinato/pen/PwLLjB).
 
+## Demo
+[View the demo](https://cinematic-slider.web.app/)
+
 ## Features
 
 - Supports both images and videos

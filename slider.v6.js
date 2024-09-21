@@ -7,7 +7,6 @@ import { SquareTransitionPlugin } from './plugins/squareEffectPlugin.js';
 
 
 
-
 let plugin = [new SquareTransitionPlugin()];
 
 class CanvasImageSlider {
